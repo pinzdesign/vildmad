@@ -8,24 +8,28 @@ const _supabase = createClient('https://kswscmjoqonxyqabktgv.supabase.co', 'eyJh
 async function getProduct(id = null) {
     if(id != null) {
         const { data, error } = await _supabase
-            .from('vildmad_full')
+            .from('vildmad')
             .select()
             .eq('id', id); 
         console.log(data);
     }
     else {
         const { data, error } = await _supabase
-            .from('vildmad_full')
+            .from('vildmad')
             .select();
         console.log(data);
         let i = 0;
         data.forEach(function() {
             const temp = document.querySelector("#items").content;
             const copy = temp.cloneNode(true);
-            copy.querySelector("h5").textContent = data[i].title;
-            copy.querySelector(".category_0").textContent = data[i]["categories/0/name"];
-            copy.querySelector(".category_1").textContent = data[i]["categories/1/name"];
-            copy.querySelector("img").setAttribute("src", data[i]["profile_image/src"]);
+            copy.querySelector("h5").innerHTML = data[i].title;
+            copy.querySelector(".category").innerHTML = "<strong>Kategori: </strong>" + data[i].categories_name;
+            copy.querySelector(".description").innerHTML = "<strong>Beskrivelse: </strong>" + data[i].description;
+            copy.querySelector(".sank_sted").innerHTML = "<strong>Sankested: </strong>" + data[i].sankested;
+            copy.querySelector(".sank_info").innerHTML = "<strong>Sankning: </strong>" + data[i].sankning;
+            copy.querySelector(".season_info").innerHTML = "<strong>Sæson: </strong>" + data[i].season_info;
+            copy.querySelector(".description_info").innerHTML = "<strong>Beskrivelse: </strong>" + data[i].description_info;
+            copy.querySelector("img").setAttribute("src", data[i].profile_image_src);
             document.querySelector("body").appendChild(copy);
             i++;
         })

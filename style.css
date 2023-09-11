@@ -2,3 +2,11 @@ img {
     width: 100px;
     height: 100px;
 }
+
+strong {
+    font-size: 20px;
+}
+
+h5 {
+    font-size: 30px;
+}
